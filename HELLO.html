@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Webpage</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <h2 style="color:red;">WARNING!!!</h2>
+  <p style="color:#fff; font-size:large;">Don't click on the like button!!!!</p>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <button class="nav-btn" id="searchBtn"><i class="fa fa-search"></i> Search</button>
+    <button class="nav-btn" id="likesBtn"><i class="fa fa-thumbs-up"></i> Likes</button>
+    <button class="nav-btn" id="profileBtn">
+      <img src="https://via.placeholder.com/30x30.png?text= " alt="Profile" class="profile-icon">
+      Profile
+    </button>
+    <button class="nav-btn" id="exitBtn"><i class="fa fa-xmark"></i> Exit</button>
+  </div>
+
+  <!-- 💬 Popups -->
+  <div id="searchPopup" class="popup">
+    <input type="text" placeholder="Type to search...">
+  </div>
+
+  <!-- Like video container -->
+  <div id="likesVideoContainer" class="popup" style="display:none; text-align:center;">
+    <video id="likesVideo" width="600" controls>
+      <source src="Alak Sir.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div id="profilePopup" class="popup profile-popup">
+    <img src="https://via.placeholder.com/100x100.png?text= " alt="Profile Picture" class="profile-pic">
+    <h2>@yourusername</h2>
+    <p>Welcome to your personal webpage! Your profile area will be updated soon.</p>
+  </div>
+
+  <script>
+    const popups = {
+      searchBtn: document.getElementById('searchPopup'),
+      likesBtn: document.getElementById('likesVideoContainer'),
+      profileBtn: document.getElementById('profilePopup')
+    };
+
+    window.onload = () => {
+      hideAllPopups();
+      popups.profileBtn.style.display = 'block';
+    };
+
+    function hideAllPopups() {
+      for (let key in popups) popups[key].style.display = 'none';
+      const video = document.getElementById('likesVideo');
+      video.pause();
+      video.currentTime = 0;
+    }
+
+    document.getElementById('searchBtn').onclick = () => {
+      hideAllPopups();
+      popups.searchBtn.style.display = 'block';
+    };
+
+    // ✅ Likes button: autoplay and fullscreen video
+    document.getElementById('likesBtn').onclick = () => {
+      hideAllPopups();
+      const container = popups.likesBtn;
+      const video = document.getElementById('likesVideo');
+      container.style.display = 'block';
+      video.play();
+
+      // Try to go fullscreen (if browser allows)
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    };
+
+    document.getElementById('profileBtn').onclick = () => {
+      hideAllPopups();
+      popups.profileBtn.style.display = 'block';
+    };
+
+    document.getElementById('exitBtn').onclick = () => {
+      alert("You have been logged out!");
+      window.location.href = "#";
+    };
+  </script>
+  <H19>Power by Siddharth </H19>
+
+</body>
+</html>
